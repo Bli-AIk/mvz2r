@@ -1,0 +1,7 @@
+[keys.normal.space]
+f = ":format"
+o = "file_picker"
+O = "file_picker_in_current_directory"
+
+l = ':sh root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)" && kitty --detach --directory "$root" just run >/dev/null 2>&1'
+L = ':sh root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)" && kitty --detach --hold --directory "$root" just run >/dev/null 2>&1'
