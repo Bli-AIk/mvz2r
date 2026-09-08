@@ -1,0 +1,3 @@
+[submodule "src/odecs"]
+	path = vendor/odecs
+	url = git@github.com:NateTheGreatt/odecs.git
