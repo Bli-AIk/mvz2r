@@ -21,6 +21,9 @@ Stage :: enum {
 	Draw,
 }
 
+Plugin :: proc(app: ^App)
+app_add_plugin :: proc(app: ^App, plugin: Plugin) {plugin(app)}
+
 // --- context ---
 Ctx :: struct {
 	world:     ^ecs.World,
@@ -84,7 +87,8 @@ app_run :: proc(app: ^App) {
 
 		// Draw
 		begin_frame()
-		clear_background(Color{0, 0, 0, 0})
+
+		clear_background(Color{0.4, 0.74, 1.0, 1})
 
 		run_stage(app, .Draw)
 
