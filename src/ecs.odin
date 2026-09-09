@@ -1,16 +1,25 @@
+// bevy 风味 ecs 封装
+// 哎一群啥鸟我始终忘不了你
+// 但是螃蟹快把我电脑储存夹爆了
 package main
 
 import ecs "../vendor/odecs/src"
 import rl "vendor:raylib"
 
-System :: #type proc(world: ^ecs.World)
+System :: proc(world: ^ecs.World)
+
+Stage :: enum {
+	Startup,
+	PreUpdate,
+	Update,
+	PostUpdate,
+	Draw,
+}
 
 // app
-
 App :: struct {
-	world:          ^ecs.World,
-	update_systems: [dynamic]System,
-	draw_systems:   [dynamic]System,
+	world:   ^ecs.World,
+	systems: [Stage][dynamic]System,
 }
 
 app_create :: proc() -> App {
@@ -18,63 +27,41 @@ app_create :: proc() -> App {
 }
 
 app_destroy :: proc(app: ^App) {
-	delete(app.update_systems)
-	delete(app.draw_systems)
+	for system_list in app.systems do delete(system_list)
 	ecs.delete_world(app.world)
 }
 
-app_add_update_system :: proc(app: ^App, sys: System) {
-	append(&app.update_systems, sys)
-}
-
-app_add_draw_system :: proc(app: ^App, sys: System) {
-	append(&app.draw_systems, sys)
-}
-
-// plugin
-
-Plugin :: #type proc(app: ^App)
-
-movement_plugin :: proc(app: ^App) {
-	app_add_update_system(app, movement_test_system)
-}
-
-// 示例：渲染模块
-render_plugin :: proc(app: ^App) {
-	app_add_draw_system(
-		app,
-		proc(world: ^ecs.World) {
-			// 执行渲染相关逻辑...
-		},
-	)
-}
-
-app_add_plugin :: proc(app: ^App, plugin: Plugin) {
-	plugin(app)
+app_add_system :: proc(app: ^App, stage: Stage, sys: System) {
+	append(&app.systems[stage], sys)
 }
 
 // app
+run_stage :: proc(app: ^App, stage: Stage) {
+	for system in app.systems[stage] {
+		system(app.world)
+	}
+}
 
 app_run :: proc(app: ^App) {
 	rl.InitWindow(640 * 2, 480 * 2, "Minecraft Vs Zombies 2: Reverie")
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
 
+	run_stage(app, .Startup)
+
 	for !rl.WindowShouldClose() {
-		// Update
-		for sys in app.update_systems {
-			sys(app.world)
-		}
+		run_stage(app, .PreUpdate)
+		run_stage(app, .Update)
+		run_stage(app, .PostUpdate)
 
 		// Draw
 		rl.BeginDrawing()
 		rl.ClearBackground({160, 200, 255, 255})
 
-		for sys in app.draw_systems {
-			sys(app.world)
-		}
+		run_stage(app, .Draw)
 
 		rl.DrawFPS(10, 10)
+
 		rl.EndDrawing()
 	}
 }

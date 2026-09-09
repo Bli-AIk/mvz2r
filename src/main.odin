@@ -15,8 +15,7 @@ main :: proc() {
 	app := app_create()
 	defer app_destroy(&app)
 
-	app_add_plugin(&app, movement_plugin)
-	app_add_plugin(&app, render_plugin)
+	app_add_system(&app, .Update, movement_test_system)
 
 	ecs.add_entity(app.world, Position{0, 0}, Velocity{1, 1})
 
