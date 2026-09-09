@@ -1,0 +1,44 @@
+# ──────────────────────────────
+# Odin 构建产物
+# ──────────────────────────────
+# `odin build src/` / `odin run src/` 会把可执行文件输出到当前目录，
+# 默认名字为源目录名 + .bin，即仓库根下的 src.bin
+/src.bin
+
+# 如果以后用 -out: 指定别的名字，把对应产物也加进来，例如：
+# /mvz2r
+# /game
+
+# 目标文件 / 静态库 / 动态库（-build-mode:obj 或手动链接时产生）
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.pdb
+*.exe
+
+# ──────────────────────────────
+# 编辑器 / 操作系统
+# ──────────────────────────────
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# ──────────────────────────────
+# Obsidian（docs/ 作为 vault）
+# ──────────────────────────────
+# 本机窗口状态：面板布局、光标位置，每次打开都会变，必忽略
+docs/.obsidian/workspace.json
+docs/.obsidian/workspace-mobile.json
+
+# 第三方主题：体积大、可重新下载
+docs/.obsidian/themes/
+
+# 缓存
+docs/.obsidian/cache/

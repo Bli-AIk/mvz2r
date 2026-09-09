@@ -2,7 +2,6 @@
 package main
 
 import ecs "../vendor/odecs/src"
-import "core:fmt"
 
 main :: proc() {
 	app := app_create()

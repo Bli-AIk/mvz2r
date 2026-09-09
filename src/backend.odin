@@ -5,7 +5,7 @@
 //
 //   draw_*_system        游戏逻辑层：查询组件，只说"画什么"，不知道 raylib
 //        ↓
-//   render.odin          本文件：把意图翻译成 raylib 调用（兼任窗口/帧/时间）
+//   app.odin             本文件：把意图翻译成 raylib 调用（兼任窗口/帧/时间）
 //        ↓
 //   raylib               后端：真正绘制
 //
