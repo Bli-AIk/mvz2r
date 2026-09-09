@@ -1,15 +1,21 @@
 {
 	"nodes":[
-		{"id":"6171227b591557dd","x":-120,"y":-260,"width":106,"height":60,"color":"6","type":"text","text":"MVZ2R"},
-		{"id":"975d05f51109e0f8","x":-146,"y":-140,"width":159,"height":120,"color":"5","type":"text","text":"backend.odin\n\n封装渲染后端（raylib）"},
+		{"id":"6171227b591557dd","type":"text","text":"MVZ2R","x":-120,"y":-260,"width":106,"height":60,"color":"6"},
+		{"id":"975d05f51109e0f8","type":"text","text":"backend.odin\n\n封装渲染后端（raylib）","x":-146,"y":-140,"width":159,"height":120,"color":"5"},
 		{"id":"d02b6f14eceb6f80","type":"text","text":"app.odin","x":-146,"y":20,"width":159,"height":60,"color":"5"},
-		{"id":"5e70a223772787fd","x":-146,"y":140,"width":159,"height":60,"color":"4","type":"text","text":"main.odin"},
-		{"id":"52eee6eb4f8cbddd","x":100,"y":140,"width":180,"height":60,"color":"5","type":"text","text":"components.odin"}
+		{"id":"5e70a223772787fd","type":"text","text":"main.odin","x":-146,"y":140,"width":159,"height":60,"color":"4"},
+		{"id":"52eee6eb4f8cbddd","type":"text","text":"components.odin","x":100,"y":140,"width":180,"height":60,"color":"5"},
+		{"id":"5c2eaa9bab9ad8cb","type":"text","text":"render.odin","x":-146,"y":400,"width":159,"height":60,"color":"3"},
+		{"id":"d03ba04b745954ac","type":"text","text":"geom.odin","x":60,"y":400,"width":159,"height":60,"color":"3"},
+		{"id":"9b1e250be19e25f8","type":"text","text":"assets.odin","x":-361,"y":400,"width":159,"height":60,"color":"3"}
 	],
 	"edges":[
 		{"id":"efb62b8f12ab0b0d","fromNode":"6171227b591557dd","fromSide":"bottom","toNode":"975d05f51109e0f8","toSide":"top"},
 		{"id":"7f2ca97d16314a01","fromNode":"975d05f51109e0f8","fromSide":"bottom","toNode":"d02b6f14eceb6f80","toSide":"top"},
 		{"id":"587e1c3d3069a3f0","fromNode":"d02b6f14eceb6f80","fromSide":"bottom","toNode":"5e70a223772787fd","toSide":"top"},
-		{"id":"2a167cede7ffba31","fromNode":"52eee6eb4f8cbddd","fromSide":"left","toNode":"5e70a223772787fd","toSide":"right"}
+		{"id":"2a167cede7ffba31","fromNode":"52eee6eb4f8cbddd","fromSide":"left","toNode":"5e70a223772787fd","toSide":"right"},
+		{"id":"4ae821ec0889e6be","fromNode":"5e70a223772787fd","fromSide":"bottom","toNode":"5c2eaa9bab9ad8cb","toSide":"top"},
+		{"id":"6d4498bfd1be8715","fromNode":"5e70a223772787fd","fromSide":"bottom","toNode":"d03ba04b745954ac","toSide":"top"},
+		{"id":"b03277da2675dae9","fromNode":"5e70a223772787fd","fromSide":"bottom","toNode":"9b1e250be19e25f8","toSide":"top"}
 	]
 }
