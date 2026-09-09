@@ -12,6 +12,12 @@ Size :: struct {
 	w, h: f32,
 }
 
-Rect :: struct {}
+Solid :: struct {}  
 
 Color :: distinct [4]f32
+
+
+Sprite :: struct {
+	texture: Texture,
+	src:     Rect,
+}

@@ -5,6 +5,12 @@ package main
 
 import ecs "../vendor/odecs/src"
 
+WINDOW_WIDTH :: 640 * 2
+WINDOW_HEIGHT :: 480 * 2
+WINDOW_TITLE :: "Minecraft Vs Zombies 2: Reverie"
+
+// ---
+
 System :: proc(ctx: ^Ctx)
 
 Stage :: enum {
@@ -24,6 +30,7 @@ Ctx :: struct {
 }
 
 resource_add :: proc(ctx: ^Ctx, value: $T) {
+	assert(typeid_of(T) not_in ctx.resources, "资源重复注册")
 	p := new(T)
 	p^ = value
 	ctx.resources[typeid_of(T)] = rawptr(p)
@@ -40,14 +47,15 @@ App :: struct {
 }
 
 app_create :: proc() -> App {
-	// TODO: 给 resources 分配东西
-	return App{ctx = Ctx{world = ecs.create_world()}}
+	return App{ctx = Ctx{world = ecs.create_world(), resources = new(map[typeid]rawptr)}}
 }
 
 app_destroy :: proc(app: ^App) {
 	for system_list in app.systems do delete(system_list)
 	ecs.delete_world(app.ctx.world)
-	// TODO: 释放 resources
+	for _, p in app.ctx.resources^ do free(p)
+	delete(app.ctx.resources^)
+	free(app.ctx.resources)
 }
 
 app_add_system :: proc(app: ^App, stage: Stage, sys: System) {
@@ -76,7 +84,7 @@ app_run :: proc(app: ^App) {
 
 		// Draw
 		begin_frame()
-		clear_background()
+		clear_background(Color{0, 0, 0, 0})
 
 		run_stage(app, .Draw)
 
