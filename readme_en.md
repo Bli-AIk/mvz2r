@@ -1,7 +1,7 @@
 # Minecraft Vs Zombies 2: Reverie
 
 | English | [简体中文](readme.md) |
-|:---------------------:|:--------------------:|
+| :-----: | :-------------------: |
 
 **Minecraft Vs Zombies 2: Reverie** is an unofficial fan game inspired by MVZ2, and is not affiliated with the MVZ2 team in any way.
 
@@ -15,7 +15,7 @@ We respect all copyrights of the original MVZ2. The core is an independent imple
 
 ### Copyrights
 
-*   **[MVZ2](https://github.com/Cuerzor/MinecraftVsZombies2Unity)** by [Cuerzor](https://github.com/Cuerzor/)
-*   **[Plants Vs Zombies](https://www.ea.com/ea-studios/popcap/plants-vs-zombies)** by [Popcap Games](https://www.ea.com/ea-studios/popcap)
-*   **[Minecraft](https://www.minecraft.net/)** by [Mojang Studios](https://www.minecraft.net/)
-*   **[Touhou Project](https://www16.big.or.jp/~zun/)** by [Team Shanghai Alice](https://www16.big.or.jp/~zun/)
+- **[MVZ2](https://github.com/Cuerzor/MinecraftVsZombies2Unity)** by [Cuerzor](https://github.com/Cuerzor/)
+- **[Plants Vs Zombies](https://www.ea.com/ea-studios/popcap/plants-vs-zombies)** by [Popcap Games](https://www.ea.com/ea-studios/popcap)
+- **[Minecraft](https://www.minecraft.net/)** by [Mojang Studios](https://www.minecraft.net/)
+- **[Touhou Project](https://www16.big.or.jp/~zun/)** by [Team Shanghai Alice](https://www16.big.or.jp/~zun/)
