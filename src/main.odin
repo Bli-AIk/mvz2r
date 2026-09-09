@@ -17,22 +17,22 @@ main :: proc() {
 
 	app_add_system(&app, .Update, movement_test_system)
 
-	ecs.add_entity(app.world, Position{0, 0}, Velocity{1, 1})
+	ecs.add_entity(app.ctx.world, Position{0, 0}, Velocity{1, 1})
 
 	app_run(&app)
 }
 
-movement_test_system :: proc(world: ^ecs.World) {
+movement_test_system :: proc(ctx: ^Ctx) {
 	using ecs
-	for arch in query(world, {Position, Velocity}) {
-		positions := get_table(world, arch, Position)
-		velocities := get_table(world, arch, Velocity)
+	for arch in query(ctx.world, {Position, Velocity}) {
+		positions := get_table(ctx.world, arch, Position)
+		velocities := get_table(ctx.world, arch, Velocity)
 
 		for i in 0 ..< len(arch.entities) {
-			positions[i].x += velocities[i].vx
-			positions[i].y += velocities[i].vy
+			positions[i].x += velocities[i].vx * ctx.dt
+			positions[i].y += velocities[i].vy * ctx.dt
 
-			fmt.println(positions[i], velocities[i])
+			fmt.println(positions[i], velocities[i], ctx.time)
 		}
 
 	}

@@ -6,7 +6,7 @@ package main
 import ecs "../vendor/odecs/src"
 import rl "vendor:raylib"
 
-System :: proc(world: ^ecs.World)
+System :: proc(ctx: ^Ctx)
 
 Stage :: enum {
 	Startup,
@@ -16,29 +16,48 @@ Stage :: enum {
 	Draw,
 }
 
-// app
+// --- context ---
+Ctx :: struct {
+	world:     ^ecs.World,
+	dt:        f32,
+	time:      f32,
+	resources: ^map[typeid]rawptr,
+}
+
+resource_add :: proc(ctx: ^Ctx, value: $T) {
+	p := new(T)
+	p^ = value
+	ctx.resources[typeid_of(T)] = rawptr(p)
+}
+
+resource_get :: proc(ctx: ^Ctx, $T: typeid) -> ^T {
+	return cast(^T)ctx.resources[T]
+}
+
+// --- app ---
 App :: struct {
-	world:   ^ecs.World,
+	ctx:     Ctx,
 	systems: [Stage][dynamic]System,
 }
 
 app_create :: proc() -> App {
-	return App{world = ecs.create_world()}
+	// TODO: 给 resources 分配东西
+	return App{ctx = Ctx{world = ecs.create_world()}}
 }
 
 app_destroy :: proc(app: ^App) {
 	for system_list in app.systems do delete(system_list)
-	ecs.delete_world(app.world)
+	ecs.delete_world(app.ctx.world)
+	// TODO: 释放 resources
 }
 
 app_add_system :: proc(app: ^App, stage: Stage, sys: System) {
 	append(&app.systems[stage], sys)
 }
 
-// app
 run_stage :: proc(app: ^App, stage: Stage) {
 	for system in app.systems[stage] {
-		system(app.world)
+		system(&app.ctx)
 	}
 }
 
@@ -50,6 +69,9 @@ app_run :: proc(app: ^App) {
 	run_stage(app, .Startup)
 
 	for !rl.WindowShouldClose() {
+		app.ctx.dt = rl.GetFrameTime()
+		app.ctx.time += app.ctx.dt
+
 		run_stage(app, .PreUpdate)
 		run_stage(app, .Update)
 		run_stage(app, .PostUpdate)
