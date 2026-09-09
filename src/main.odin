@@ -16,7 +16,7 @@ main :: proc() {
 		Position{100, 100},
 		Velocity{100, 100},
 		Size{64, 64 * 2},
-		Color{255, 255 / 2, 0, 255},
+		Color{1.0, 0.5, 0, 1},
 		Rect{},
 	)
 

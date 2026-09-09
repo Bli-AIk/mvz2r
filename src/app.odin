@@ -1,10 +1,9 @@
-// bevy 风味 ecs 封装
+// bevy 风味封装
 // 哎一群啥鸟我始终忘不了你
 // 但是螃蟹快把我电脑储存夹爆了
 package main
 
 import ecs "../vendor/odecs/src"
-import rl "vendor:raylib"
 
 System :: proc(ctx: ^Ctx)
 
@@ -62,14 +61,13 @@ run_stage :: proc(app: ^App, stage: Stage) {
 }
 
 app_run :: proc(app: ^App) {
-	rl.InitWindow(640 * 2, 480 * 2, "Minecraft Vs Zombies 2: Reverie")
-	defer rl.CloseWindow()
-	rl.SetTargetFPS(60)
-
+	init_window()
+	defer close_window()
+	set_target_fps(60)
 	run_stage(app, .Startup)
 
-	for !rl.WindowShouldClose() {
-		app.ctx.dt = rl.GetFrameTime()
+	for !window_should_close() {
+		app.ctx.dt = frame_time()
 		app.ctx.time += app.ctx.dt
 
 		run_stage(app, .PreUpdate)
@@ -77,13 +75,13 @@ app_run :: proc(app: ^App) {
 		run_stage(app, .PostUpdate)
 
 		// Draw
-		rl.BeginDrawing()
-		rl.ClearBackground({160, 200, 255, 255})
+		begin_frame()
+		clear_background()
 
 		run_stage(app, .Draw)
 
-		rl.DrawFPS(10, 10)
+		draw_fps(10, 10)
 
-		rl.EndDrawing()
+		end_frame()
 	}
 }

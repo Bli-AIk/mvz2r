@@ -14,4 +14,4 @@ Size :: struct {
 
 Rect :: struct {}
 
-Color :: distinct [4]u8
+Color :: distinct [4]f32
