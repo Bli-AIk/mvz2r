@@ -1,0 +1,13 @@
+[language-server.ols]
+command = "ols"
+# helix 用的键名是 config（会作为 initialize 的 initializationOptions 送达），
+# 不是 init_options —— 后者 helix 不认识，会被静默丢弃。
+# checker_args 原样拼进 `odin check` 命令行，所以这里放的是 odin 自己的开关。
+config = { checker_args = "-vet-unused-variables" }
+# 不设这个，ols 启动时会警告找不到 builtin 目录（我实测诊断/悬停仍可用，
+# 但供应商文档说 builtin 相关功能需要它，留着cost为零）。
+environment = { OLS_BUILTIN_FOLDER = "/usr/lib/odin/base/builtin" }
+
+[[language]]
+name = "odin"
+language-servers = ["ols"]
