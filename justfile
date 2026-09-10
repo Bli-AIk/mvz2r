@@ -4,7 +4,7 @@ default:
     @just run
 
 build:
-    odin build {{source_path}}
+    odin build {{source_path}} -vet
 
 run:
-    odin run {{source_path}}
+    odin run {{source_path}} -vet

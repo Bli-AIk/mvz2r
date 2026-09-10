@@ -1,5 +1,6 @@
 package main
 
+// basic
 Position :: struct {
 	x, y: f32,
 }
@@ -12,12 +13,26 @@ Size :: struct {
 	w, h: f32,
 }
 
-Solid :: struct {}  
+Solid :: struct {}
 
 Color :: distinct [4]f32
-
 
 Sprite :: struct {
 	texture: Texture,
 	src:     Rect,
 }
+
+// cell
+CellKind :: enum {
+	Ground,
+	Water,
+	Air,
+}
+
+Cell :: struct {
+	row, col: int,
+	kind:     CellKind,
+}
+
+// zombie
+Zombie :: struct {}
